@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{74E045B5-CB8F-4CFE-8FF5-263BFAF96CC9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CloudInit</RootNamespace>
+    <AssemblyName>CloudInit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\External\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="CIAssemblyLoader.cs" />
+    <Compile Include="CIEngine.cs" />
+    <Compile Include="CIService.cs" />
+    <Compile Include="CloudInitService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CloudInitService.Designer.cs">
+      <DependentUpon>CloudInitService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LSAHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CloudInit.Modules.Core\CloudInit.Modules.Core.csproj">
+      <Project>{D6704E04-7B2B-44EA-A70E-B7DCF044FDA3}</Project>
+      <Name>CloudInit.Modules.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CloudInit.Modules\CloudInit.Modules.csproj">
+      <Project>{BD8B5CB5-D6E0-42EF-B08C-B3E04C9A4FF9}</Project>
+      <Name>CloudInit.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CloudInit.Notification.Core\CloudInit.Notification.Core.csproj">
+      <Project>{3FC19B04-8B46-4BE6-9691-DC5A75586C2C}</Project>
+      <Name>CloudInit.Notification.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CloudInit.Notification\CloudInit.Notification.csproj">
+      <Project>{88739315-B005-4153-BD7F-E02ED18CA542}</Project>
+      <Name>CloudInit.Notification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CloudInit.Registry\CloudInit.Registry.csproj">
+      <Project>{3F37B0AA-6863-4585-9F51-2B5877594C25}</Project>
+      <Name>CloudInit.Registry</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
