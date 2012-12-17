@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="CloudInit" default="build" xmlns="http://nant.sf.net/release/0.85/nant.xsd">
+  <!-- Include the settings file -->
+  <property name="build.config.settings" value="__NONE__" overwrite="false" />
+  <include buildfile="${build.config.settings}" if="${file::exists(build.config.settings)}" />
+
+  <!-- Internal properties -->
+  <property name="file.compile.cloudinit" value="${buildscripts.dir}\compile.cloudinit.step" />
+  <property name="file.compile.cloudinit.encrypt" value="${buildscripts.dir}\compile.cloudinit.encrypt.step" />
+  <property name="file.compile.cloudinit.configuration" value="${buildscripts.dir}\compile.cloudinit.configuration.step" />
+  
+  <target name="build" depends="run_tasks" />
+  <target name="run_tasks" description="Running tasks for the current project">
+    <echo message="Running ${project::get-name()} tasks." />
+    <call target="prepare" />
+    <call target="get_version" />
+    <call target="get_assembly_info" />
+    <nant buildfile="${file.compile.cloudinit}" inheritall="true" />
+	<nant buildfile="${file.compile.cloudinit.encrypt}" inheritall="true" />
+	<nant buildfile="${file.compile.cloudinit.configuration}" inheritall="true" />
+	<call target="copy_scripts" />
+  </target> 
+  
+  <target name="prepare" description="Prepares the build directory">
+    <tstamp>
+      <formatter property="datetime.buildtime" pattern="yyyy-MM-dd, HH:mm:ss" />
+    </tstamp>
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <echo message="Current directory '${project::get-base-directory()}'"/>
+  </target>  
+  
+  <target name="get_version" description="Generates the new version number for the project">
+    <vgen out="project.version" version="${version.major}.${version.minor}" startdate="2011-12-20" />
+  </target>
+
+  <target name="get_assembly_info" description="Generates the new CommonAssemblyInfo.cs file for the project.">
+    <delete file="${source.dir}/CommonAssemblyInfo.cs" failonerror="false"/>
+    <asminfo output="${source.dir}/CommonAssemblyInfo.cs" language="CSharp">
+      <imports>
+        <import namespace="System" />
+        <import namespace="System.Reflection" />
+        <import namespace="System.Runtime.InteropServices" />
+        <import namespace="System.Security" />
+      </imports>
+      <attributes>
+        <attribute type="AssemblyVersionAttribute" value="${project.version}" />
+        <attribute type="AssemblyFileVersionAttribute" value="${project.version}" />
+        <attribute type="AssemblyCopyrightAttribute" value="Copyright Â© ${company.name} 2011-${datetime::get-year(datetime::now())}" />
+        <attribute type="AssemblyProductAttribute" value="${project::get-name()}" />
+        <attribute type="AssemblyCompanyAttribute" value="${company.name}" />
+        <attribute type="AssemblyConfigurationAttribute" value="${msbuild.configuration}" />
+        <attribute type="AssemblyInformationalVersionAttribute" value="${project.version}" />
+        <attribute type="AllowPartiallyTrustedCallersAttribute" asis="true" />
+        <attribute type="ComVisibleAttribute" value="false" />
+      </attributes>
+      <references>
+        <include name="System.dll" />
+      </references>
+    </asminfo>
+  </target>
+  
+  <target name="copy_scripts" description="Copies all the required scripts to an output folder.">
+    <copy todir="${output.dir}\CloudInit\">
+		<fileset basedir="${scripts.dir}\Other\">
+			<include name="*" />
+			<include name="**/*.*" />
+		</fileset>
+    </copy>
+  </target>
+  
+</project>

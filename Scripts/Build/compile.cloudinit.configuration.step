@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="CloudInitNET" default="compile" xmlns="http://nant.sf.net/release/0.85/nant.xsd">
+  <!-- Include the settings file -->
+  <property name="build.config.settings" value="__NONE__" overwrite="false" />
+  <include buildfile="${build.config.settings}" if="${file::exists(build.config.settings)}" />
+
+  <target name="compile">
+    <scansln solution="${source.dir.abs}">
+      <projects>
+        <project name="CloudInit.Configuration" alias="CloudInit" />
+      </projects>
+      <do name="project.name" alias="project.alias" directory="project.directory">
+        <mkdir dir="${build.dir.abs}\${project.alias}" />
+        <mkdir dir="${output.dir}\${project.alias}" />
+
+        <exec program="${framework::get-framework-directory(framework::get-target-framework())}\msbuild.exe"
+              commandline="/p:Configuration=${msbuild.configuration} /p:OutDir=${build.dir.abs}\${project.alias}\ /p:AssemblyOriginatorKeyFile=CloutInit.NET.snk" workingdir="${project.directory}\" />
+
+		<copy todir="${output.dir}\${project.alias}">
+			<fileset basedir="${build.dir.abs}\${project.alias}">
+				<include name="CloudInit.Configuration.dll" />
+			</fileset>
+		</copy>
+      </do>
+    </scansln>
+  </target>
+</project>
