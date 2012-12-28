@@ -1,9 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="EmailNotificaionProvider.cs" company="SBR Net Marketing LLC" author="Brian Wight">
-//     Copyright 2011 SBR Net Marketing LLC. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-using System;
+﻿using System;
 using System.Net.Mail;
 using CloudInit.Notification.Core;
 using Microsoft.Win32;

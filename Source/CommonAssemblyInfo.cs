@@ -15,9 +15,9 @@ using System.Security;
 
 [assembly: AssemblyVersionAttribute("1.3.1206.3660")]
 [assembly: AssemblyFileVersionAttribute("1.3.1206.3660")]
-[assembly: AssemblyCopyrightAttribute("Copyright © SBR NetMarketing & Consulting 2011-2012")]
+[assembly: AssemblyCopyrightAttribute("Copyright © Brian Wight 2011-2012")]
 [assembly: AssemblyProductAttribute("CloudInit")]
-[assembly: AssemblyCompanyAttribute("SBR NetMarketing & Consulting")]
+[assembly: AssemblyCompanyAttribute("Brian Wight")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyInformationalVersionAttribute("1.3.1206.3660")]
 [assembly: AllowPartiallyTrustedCallersAttribute()]
