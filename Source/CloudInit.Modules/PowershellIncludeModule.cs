@@ -74,7 +74,11 @@ namespace CloudInit.Modules
         /// <returns></returns>
         protected virtual String ReadContent(Byte[] content)
         {
-            return Encoding.ASCII.GetString(content);
+            using (var stream = new MemoryStream(content))
+            using(var reader = new StreamReader(stream, Encoding.Default))
+            {
+                return reader.ReadToEnd();
+            }
         }
 
         /// <summary>

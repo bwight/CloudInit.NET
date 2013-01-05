@@ -13,13 +13,13 @@ using System.Security;
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: AssemblyVersionAttribute("1.3.1228.5055")]
-[assembly: AssemblyFileVersionAttribute("1.3.1228.5055")]
-[assembly: AssemblyCopyrightAttribute("Copyright © Brian Wight 2011-2012")]
+[assembly: AssemblyVersionAttribute("1.3.1305.4496")]
+[assembly: AssemblyFileVersionAttribute("1.3.1305.4496")]
+[assembly: AssemblyCopyrightAttribute("Copyright © Brian Wight 2011-2013")]
 [assembly: AssemblyProductAttribute("CloudInit")]
 [assembly: AssemblyCompanyAttribute("Brian Wight")]
 [assembly: AssemblyConfigurationAttribute("Release")]
-[assembly: AssemblyInformationalVersionAttribute("1.3.1228.5055")]
+[assembly: AssemblyInformationalVersionAttribute("1.3.1305.4496")]
 [assembly: AllowPartiallyTrustedCallersAttribute()]
 [assembly: ComVisibleAttribute(false)]
 
